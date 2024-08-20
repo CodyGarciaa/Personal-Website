@@ -1,0 +1,62 @@
+.project-card {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 200px;
+    border: 2px solid #000;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #f5f5f5;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+  }
+
+  .project-descript-video {
+    display: flex;
+    flex: 4;
+  }
+  
+  .project-content {
+    flex: 3;
+    padding-right: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .project-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 10px;
+  }
+  
+  .project-description {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 0px;
+    margin-top: 10px;
+  }
+  
+  .project-learnings {
+    flex: 1;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  
+  .project-media {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .media-placeholder {
+    font-size: 16px;
+    color: #777;
+  }
+  

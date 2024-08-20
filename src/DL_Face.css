@@ -1,0 +1,62 @@
+.driver-license {
+    width: 350px;
+    height: 200px;
+    border: 2px solid #0096FF;
+    border-radius: 12px;
+    padding: 16px;
+    background-color: #e6f4ff;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .license-header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #004d80;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .license-body {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .license-photo {
+    width: 100px;
+    height: 120px;
+    background-color: #ffd966;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .photo-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: #ffb366;
+    border-radius: 50%;
+  }
+  
+  .license-info {
+    flex: 1;
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .license-line {
+    height: 16px;
+    background-color: #cccccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .bold-line {
+    background-color: #ff6666;
+    height: 18px;
+  }
