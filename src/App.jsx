@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { extend } from '@react-three/fiber'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, useAnimations, useScroll, ScrollControls, SoftShadows } from "@react-three/drei"
+import { useGLTF, useAnimations, useScroll, ScrollControls, Float, Html } from "@react-three/drei"
 
 import './App.css'
 

@@ -5,7 +5,7 @@ export default function DL_Face() {
     return(
         <>
             <div className="driver-license">
-            <div className="license-header">DRIVER LICENSE</div>
+            <div className="license-header">CODY Z GARCIA</div>
             <div className="license-body">
                 <div className="license-photo">
                 {/* Placeholder for the user profile picture */}
