@@ -20,21 +20,30 @@ import Project6_Card from './Project6_Card';
 
 function App() {
 
+  const [isOpened, setIsOpened] = useState(false);
+
+  const handleWalletClick = () => {
+    setIsOpened(!isOpened);
+    console.log(isOpened);
+  };
+
   return (
     <Canvas camera={{ position: [15, 10, 10], fov: 50 }}>
       <OrbitControls />
       <ambientLight intensity={0.5} />
       <directionalLight intensity={2} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
       <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
-        <Wallet />
-        <DL_Card />
-        <Business_Card />
-        <Project1_Card />
-        <Project2_Card />
-        <Project3_Card />
-        <Project4_Card />
-        <Project5_Card />
-        <Project6_Card />
+        <group>
+          <Wallet onWalletClick={handleWalletClick} isOpened={isOpened} />
+          <DL_Card />
+          <Business_Card />
+          <Project1_Card />
+          <Project2_Card isOpened={isOpened} />
+          <Project3_Card isOpened={isOpened} />
+          <Project4_Card isOpened={isOpened} />
+          <Project5_Card isOpened={isOpened} />
+          <Project6_Card isOpened={isOpened} />
+        </group>
       </ScrollControls>            
     </Canvas>
   )

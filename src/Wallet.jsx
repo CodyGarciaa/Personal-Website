@@ -8,23 +8,22 @@ import * as THREE from 'three'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-export default function Wallet(props) {
+export default function Wallet({ onWalletClick, isOpened, ...props }) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/final_models/walletfinal.glb')
-  const { actions, names } = useAnimations(animations, group)
-  const [isOpened, setIsOpened] = useState(false)
-  console.log(names)
+  const { actions } = useAnimations(animations, group)
+  // const [isOpened, setIsOpened] = useState(false)
 
   materials.Sleeve_Material.transparent = true;
   materials.Sleeve_Material.opacity = 0.5;
 
-  useEffect(() => {
-    actions['WalletOpenAnimation'].setLoop(THREE.LoopOnce, 1);
-    actions['WalletOpenAnimation'].clampWhenFinished = true;
-    actions['WalletOpenAnimation'].fadeIn(0.5).play()
-  }, [])
+  // useEffect(() => {
+  //   actions['WalletOpenAnimation'].setLoop(THREE.LoopOnce, 1);
+  //   actions['WalletOpenAnimation'].clampWhenFinished = true;
+  //   actions['WalletOpenAnimation'].fadeIn(0.5).play()
+  // }, [])
 
-  const helper = () => {
+  useEffect( () => {
     console.log('clicked wallet')
     
     if(!isOpened) {
@@ -33,28 +32,27 @@ export default function Wallet(props) {
         actions['SleeveOpenAnimation'].setLoop(THREE.LoopOnce, 1);
         actions['SleeveOpenAnimation'].clampWhenFinished = true;
         actions['SleeveOpenAnimation'].fadeIn(0.5).play()
-        console.log('opening')
-        setIsOpened(true)
+        console.log('opening wallet')
     } else {
         actions['SleeveOpenAnimation'].fadeOut(0.5)
         actions['SleeveCloseAnimation'].reset()
         actions['SleeveCloseAnimation'].setLoop(THREE.LoopOnce, 1);
         actions['SleeveCloseAnimation'].clampWhenFinished = true;
         actions['SleeveCloseAnimation'].fadeIn(0.5).play()
-        console.log('closing')
-        setIsOpened(false)
+        console.log('closing wallet')
     }
-  }
+  }, [isOpened])
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Scene" onClick={helper}>
+      <group name="Scene">
         <group name="ArmatureSleeve" position={[-0.01, 0, -0.758]}>
           <skinnedMesh
             name="Sleeve"
             geometry={nodes.Sleeve.geometry}
             material={materials.Sleeve_Material}
             skeleton={nodes.Sleeve.skeleton}
+            onClick={onWalletClick}
           />
           <primitive object={nodes.firstfold} />
           <primitive object={nodes.firstsleeve} />
