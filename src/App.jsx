@@ -5,18 +5,18 @@ import { extend } from '@react-three/fiber'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas, useFrame } from "@react-three/fiber"
 import { useGLTF, useAnimations, useScroll, ScrollControls, SoftShadows } from "@react-three/drei"
-import Wallet2 from './wallet2';
-import Wallet3 from './wallet3';
-import Wallet4 from './wallet4';
-// import { EffectComposer, TiltShift2 } from "@react-three/postprocessing"
 
 import './App.css'
 
-import Wallet from './wallet'
-import { Model } from './testing';
-import Wallet5 from './wallet5';
-import Wallet6 from './wallet6';
+import Wallet from './wallet';
 import DL_Card from './dl_card';
+import Business_Card from './Business_Card';
+import Project1_Card from './Project1_Card';
+import Project2_Card from './Project2_Card';
+import Project3_Card from './Project3_Card';
+import Project4_Card from './Project4_Card';
+import Project5_Card from './Project5_Card';
+import Project6_Card from './Project6_Card';
 
 function App() {
 
@@ -26,12 +26,15 @@ function App() {
       <ambientLight intensity={0.5} />
       <directionalLight intensity={2} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
       <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
-        {/* <Wallet /> */}
-        {/* <Model position={[0, -1, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} /> */}
-        {/* <Wallet2 /> */}
-        {/* <Wallet4 /> */}
-        <Wallet6 />
+        <Wallet />
         <DL_Card />
+        <Business_Card />
+        <Project1_Card />
+        <Project2_Card />
+        <Project3_Card />
+        <Project4_Card />
+        <Project5_Card />
+        <Project6_Card />
       </ScrollControls>            
     </Canvas>
   )
