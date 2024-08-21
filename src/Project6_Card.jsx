@@ -10,6 +10,7 @@ import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useSpring, useSpringRef, useChain, animated } from '@react-spring/three'
 import Project_Card_Face from './Project_Card_Face'
+import Project_Details from './Project_Details'
 import Projects_Face from './Projects_Face'
 
 export default function Project6_Card({isOpened, ...props}) {
@@ -118,18 +119,33 @@ export default function Project6_Card({isOpened, ...props}) {
                               >
                                 <Project_Card_Face number={6} />
                               </Html>
-                              <Html
-                                occlude="blending"
-                                wrapperClass="nodes"
-                                position={[4.08, 2.69, 0.07]}
-                                transform
-                                distanceFactor={8.1}
-                                rotation-y={THREE.MathUtils.degToRad(180.2)}
-                                style={{ pointerEvents: 'none' }}
-                                visible={projsVisible}
-                              >
-                                <Projects_Face />
-                              </Html>
+                              {projsVisible && (
+                                <Html
+                                  occlude="blending"
+                                  wrapperClass="nodes"
+                                  position={[4.08, 2.69, 0.07]}
+                                  transform
+                                  distanceFactor={8.1}
+                                  rotation-y={THREE.MathUtils.degToRad(180.2)}
+                                  style={{ pointerEvents: 'none' }}
+                                >
+                                  <Projects_Face />
+                                </Html>
+                              )}
+                              {!projsVisible && (
+                                <Html
+                                  occlude="blending"
+                                  wrapperClass="nodes"
+                                  position={[4.08, 2.69, 0.07]}
+                                  transform
+                                  distanceFactor={8.1}
+                                  rotation-y={THREE.MathUtils.degToRad(0)}
+                                  rotation-x={THREE.MathUtils.degToRad(180)}
+                                  style={{ pointerEvents: 'none' }}
+                                >
+                                  <Project_Details />
+                                </Html>
+                              )}
                             </primitive>
                           </primitive>
                         </primitive>

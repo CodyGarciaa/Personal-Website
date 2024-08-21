@@ -8,6 +8,7 @@ import * as THREE from 'three'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three'
+import Project_Details from './Project_Details'
 import Project_Card_Face from './Project_Card_Face'
 
 export default function Project4_Card({isOpened, ...props}) {
@@ -100,6 +101,18 @@ export default function Project4_Card({isOpened, ...props}) {
                         style={{ pointerEvents: 'none' }}
                       >
                         <Project_Card_Face number={4} />
+                      </Html>
+                      <Html
+                        occlude="blending"
+                        wrapperClass="nodes"
+                        position={[4.08, 2.695, -0.18]}
+                        transform
+                        distanceFactor={8.1}
+                        rotation-y={THREE.MathUtils.degToRad(-0.4)}
+                        rotation-x={THREE.MathUtils.degToRad(180)}
+                        style={{ pointerEvents: 'none' }}
+                      >
+                        <Project_Details />
                       </Html>
                     </primitive>
                   </primitive>

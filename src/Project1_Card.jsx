@@ -8,12 +8,12 @@ import * as THREE from 'three'
 import React, { useRef, useState } from 'react'
 import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three'
+import Project_Details from './Project_Details'
 import Project_Card_Face from './Project_Card_Face'
 
 export default function Project1_Card({ isOpened, ...props }) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/final_models/Proj1final.glb')
-  const { actions } = useAnimations(animations, group)
 
   const [clicked, toggleClick] = useState(false);
   const [secTime, toggleSecTime] = useState();
@@ -67,6 +67,17 @@ export default function Project1_Card({ isOpened, ...props }) {
               style={{ pointerEvents: 'none' }}
             >
               <Project_Card_Face number={1} />
+            </Html>
+            <Html
+              occlude="blending"
+              wrapperClass="nodes"
+              position={[-4.1, 2.67, 0.1]}
+              transform
+              distanceFactor={8.2}
+              rotation-y={THREE.MathUtils.degToRad(181.03)}
+              style={{ pointerEvents: 'none' }}
+            >
+              <Project_Details />
             </Html>
           </primitive>
         </animated.group>
