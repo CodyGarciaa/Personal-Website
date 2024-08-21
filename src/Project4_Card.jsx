@@ -13,29 +13,31 @@ export default function Project4_Card({isOpened, ...props}) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/final_models/Proj4final.glb')
   const { actions } = useAnimations(animations, group)
+  const isFirstRender = useRef(true);
 
-  // const helper = () => {
-  //   console.log('clicked proj4')
-  //   actions['SleeveOpenAnimation'].setLoop(THREE.LoopOnce, 1);
-  //   actions['SleeveOpenAnimation'].clampWhenFinished = true;
-  //   actions['SleeveOpenAnimation'].fadeIn(0.5).play()
-  // }
-
-  useEffect( () => {    
-    if(!isOpened) {
-        actions['SleeveCloseAnimation'].fadeOut(0.5)
-        actions['SleeveOpenAnimation'].reset()
-        actions['SleeveOpenAnimation'].setLoop(THREE.LoopOnce, 1);
-        actions['SleeveOpenAnimation'].clampWhenFinished = true;
-        actions['SleeveOpenAnimation'].fadeIn(0.5).play()
-        console.log('opening proj')
+  useEffect( () => {
+    if (isFirstRender.current) {
+      console.log('first render');
+      isFirstRender.current = false; // Skip the first render
+      return;
     } else {
-        actions['SleeveOpenAnimation'].fadeOut(0.5)
-        actions['SleeveCloseAnimation'].reset()
-        actions['SleeveCloseAnimation'].setLoop(THREE.LoopOnce, 1);
-        actions['SleeveCloseAnimation'].clampWhenFinished = true;
-        actions['SleeveCloseAnimation'].fadeIn(0.5).play()
-        console.log('closing proj')
+      console.log('clicked wallet')
+    
+      if(isOpened) {
+          actions['SleeveCloseAnimation'].fadeOut(0.5)
+          actions['SleeveOpenAnimation'].reset()
+          actions['SleeveOpenAnimation'].setLoop(THREE.LoopOnce, 1);
+          actions['SleeveOpenAnimation'].clampWhenFinished = true;
+          actions['SleeveOpenAnimation'].fadeIn(0.5).play()
+          console.log('opening wallet')
+      } else {
+          actions['SleeveOpenAnimation'].fadeOut(0.5)
+          actions['SleeveCloseAnimation'].reset()
+          actions['SleeveCloseAnimation'].setLoop(THREE.LoopOnce, 1);
+          actions['SleeveCloseAnimation'].clampWhenFinished = true;
+          actions['SleeveCloseAnimation'].fadeIn(0.5).play()
+          console.log('closing wallet')
+      }
     }
   }, [isOpened])
 

@@ -1,4 +1,5 @@
 import './DL_Face.css'
+import ProfPic from '/profile_pic.jpg'
 
 export default function DL_Face() {
 
@@ -9,7 +10,11 @@ export default function DL_Face() {
             <div className="license-body">
                 <div className="license-photo">
                 {/* Placeholder for the user profile picture */}
-                <div className="photo-placeholder"></div>
+                <img 
+                    src={ProfPic} 
+                    width={'100px'}
+                    height={'120px'}
+                />
                 </div>
                 <div className="license-info">
                 <div className="license-line"></div>

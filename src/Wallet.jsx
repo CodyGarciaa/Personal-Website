@@ -12,50 +12,57 @@ export default function Wallet({ onWalletClick, isOpened, ...props }) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/final_models/walletfinal.glb')
   const { actions } = useAnimations(animations, group)
-  // const [isOpened, setIsOpened] = useState(false)
-
-  materials.Sleeve_Material.transparent = true;
-  materials.Sleeve_Material.opacity = 0.5;
-
-  // useEffect(() => {
-  //   actions['WalletOpenAnimation'].setLoop(THREE.LoopOnce, 1);
-  //   actions['WalletOpenAnimation'].clampWhenFinished = true;
-  //   actions['WalletOpenAnimation'].fadeIn(0.5).play()
-  // }, [])
+  const isFirstRender = useRef(true);
 
   useEffect( () => {
-    console.log('clicked wallet')
-    
-    if(!isOpened) {
-        actions['SleeveCloseAnimation'].fadeOut(0.5)
-        actions['SleeveOpenAnimation'].reset()
-        actions['SleeveOpenAnimation'].setLoop(THREE.LoopOnce, 1);
-        actions['SleeveOpenAnimation'].clampWhenFinished = true;
-        actions['SleeveOpenAnimation'].fadeIn(0.5).play()
-        console.log('opening wallet')
+    if (isFirstRender.current) {
+      console.log('first render');
+      isFirstRender.current = false; // Skip the first render
+      return;
     } else {
-        actions['SleeveOpenAnimation'].fadeOut(0.5)
-        actions['SleeveCloseAnimation'].reset()
-        actions['SleeveCloseAnimation'].setLoop(THREE.LoopOnce, 1);
-        actions['SleeveCloseAnimation'].clampWhenFinished = true;
-        actions['SleeveCloseAnimation'].fadeIn(0.5).play()
-        console.log('closing wallet')
+      console.log('clicked wallet')
+    
+      if(isOpened) {
+          actions['SleeveCloseAnimation'].fadeOut(0.5)
+          actions['SleeveOpenAnimation'].reset()
+          actions['SleeveOpenAnimation'].setLoop(THREE.LoopOnce, 1);
+          actions['SleeveOpenAnimation'].clampWhenFinished = true;
+          actions['SleeveOpenAnimation'].fadeIn(0.5).play()
+          console.log('opening wallet')
+      } else {
+          actions['SleeveOpenAnimation'].fadeOut(0.5)
+          actions['SleeveCloseAnimation'].reset()
+          actions['SleeveCloseAnimation'].setLoop(THREE.LoopOnce, 1);
+          actions['SleeveCloseAnimation'].clampWhenFinished = true;
+          actions['SleeveCloseAnimation'].fadeIn(0.5).play()
+          console.log('closing wallet')
+      }
     }
   }, [isOpened])
 
+  materials.Sleeve_Material.transparent = true;
+  materials.Sleeve_Material.opacity = 0.3;
+
+  useEffect(() => {
+    actions['WalletOpenAnimation'].setLoop(THREE.LoopOnce, 1);
+    actions['WalletOpenAnimation'].clampWhenFinished = true;
+    actions['WalletOpenAnimation'].fadeIn(0.5).play()
+  }, [])
+
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null} >
       <group name="Scene">
-        <group name="ArmatureSleeve" position={[-0.01, 0, -0.758]}>
+        <group name="ArmatureSleeve" position={[-0.01, 0, -0.758]} >
           <skinnedMesh
             name="Sleeve"
             geometry={nodes.Sleeve.geometry}
             material={materials.Sleeve_Material}
             skeleton={nodes.Sleeve.skeleton}
             onClick={onWalletClick}
+            frustumCulled={false}
           />
-          <primitive object={nodes.firstfold} />
-          <primitive object={nodes.firstsleeve} />
+          <primitive object={nodes.firstfold}/>
+          <primitive object={nodes.firstsleeve}/>
         </group>
         <group
           name="ArmatureWallet"
