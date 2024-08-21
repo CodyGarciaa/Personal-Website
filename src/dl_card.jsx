@@ -22,9 +22,6 @@ export default function DL_Card(props) {
 
   const helper = () => {
     console.log('clicked DL')
-    // actions['WalletOpenAnimation'].setLoop(THREE.LoopOnce, 1);
-    // actions['WalletOpenAnimation'].clampWhenFinished = true;
-    // actions['WalletOpenAnimation'].fadeIn(0.5).play()
   }
   // const {dl_position} = useSpring({
   //   from: { dl_position: [-7.081, 0.626, -1.709]},

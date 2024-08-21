@@ -37,7 +37,7 @@ function App() {
           <Wallet onWalletClick={handleWalletClick} isOpened={isOpened} />
           <DL_Card />
           <Business_Card />
-          <Project1_Card />
+          <Project1_Card isOpened={isOpened} />
           <Project2_Card isOpened={isOpened} />
           <Project3_Card isOpened={isOpened} />
           <Project4_Card isOpened={isOpened} />

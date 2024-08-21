@@ -62,13 +62,15 @@ export default function Project5_Card({isOpened, ...props}) {
   useChain(clicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);
 
   const helper = () => {
-    // console.log('clicked 5');
-    // if (clicked) {              //time for pos to play after rot
-    //   toggleSecTime(0.4);
-    // } else {                    //time for rot to play after pos
-    //   toggleSecTime(0.9);
-    // }
-    // toggleClick(!clicked);
+    if(isOpened) {
+      console.log('clicked 5');
+      if (clicked) {              //time for pos to play after rot
+        toggleSecTime(0.4);
+      } else {                    //time for rot to play after pos
+        toggleSecTime(0.9);
+      }
+      toggleClick(!clicked);
+    }
   };
 
   return (
