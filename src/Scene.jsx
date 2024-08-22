@@ -25,7 +25,7 @@ export default function Scene( {handleWalletClick, isOpened} ) {
     <>
       <Canvas camera={{ position: [15, 10, 10], fov: 50 }}>
         <OrbitControls />
-        <CameraController />
+        {/* <CameraController /> */}
         <ambientLight intensity={0.5} />
         <directionalLight intensity={2} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
         <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
