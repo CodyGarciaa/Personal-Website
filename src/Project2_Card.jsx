@@ -77,7 +77,7 @@ export default function Project2_Card({ isOpened, ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene" onClick={helper}>
-        <animated.group name="ArmatureSleeve" position={[-0.01, 0, -0.758]}>
+        <animated.group name="ArmatureSleeve" position={positionSpring.pos} rotation={rotationSpring.rot}>
           <skinnedMesh
             name="Proj2Card"
             geometry={nodes.Proj2Card.geometry}

@@ -58,7 +58,7 @@ export default function Wallet({ onWalletClick, isOpened, ...props }) {
             geometry={nodes.Sleeve.geometry}
             material={materials.Sleeve_Material}
             skeleton={nodes.Sleeve.skeleton}
-            onClick={onWalletClick}
+            onClick={isOpened ? '' : onWalletClick}
             frustumCulled={false}
           />
           <primitive object={nodes.firstfold}/>
