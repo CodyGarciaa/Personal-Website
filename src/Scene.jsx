@@ -1,13 +1,9 @@
-import * as THREE from 'three';
-import { useRef, useState } from 'react'
-import { Suspense } from 'react'
-import { extend } from '@react-three/fiber'
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
-import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, useAnimations, useScroll, ScrollControls, Float, Html } from "@react-three/drei"
+
+
+import { useFrame } from "@react-three/fiber"
+import { ScrollControls } from "@react-three/drei"
 
 import './App.css'
-
 import Wallet from './wallet';
 import DL_Card from './dl_card';
 import Business_Card from './Business_Card';
@@ -19,16 +15,22 @@ import Project5_Card from './Project5_Card';
 import Project6_Card from './Project6_Card';
 import CameraController from './CameraController';
 
-export default function Scene( {handleWalletClick, isOpened} ) {
+export default function Scene( {handleWalletClick, setFrameData, isOpened} ) {
+          
+  useFrame((state) => {
+    const currentFrameData = {
+    state: state,
+    camera: state.camera,
+    pointer: state.pointer,
+    test: 'passing',
+    };
+
+    setFrameData(currentFrameData);
+  });
 
   return (
     <>
-      <Canvas camera={{ position: [15, 10, 10], fov: 50 }}>
-        <OrbitControls />
-        {/* <CameraController /> */}
-        <ambientLight intensity={0.5} />
-        <directionalLight intensity={2} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
-        <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
+      <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
           <group>
             <Wallet onWalletClick={handleWalletClick} isOpened={isOpened} />
             <DL_Card />
@@ -40,8 +42,7 @@ export default function Scene( {handleWalletClick, isOpened} ) {
             <Project5_Card isOpened={isOpened} />
             <Project6_Card isOpened={isOpened} />
           </group>
-        </ScrollControls>            
-      </Canvas>
+        </ScrollControls>  
     </>
   )
 }
