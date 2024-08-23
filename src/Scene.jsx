@@ -31,7 +31,7 @@ export default function Scene( {handleWalletClick, handleDLClick, setFrameData, 
     <>
       <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
           <group>
-            {/* <mesh position={[-3, 17.6, 9.8]}>
+            {/* <mesh position={[0, 3, -2]}>
                 <sphereGeometry />
                 <meshStandardMaterial color="hotpink" />
             </mesh> */}

@@ -17,22 +17,6 @@ export default function CameraController({ frameData, DLClicked }) {
   const cameraControls = useRef();
   const [openingDone, setOpeningDone] = useState(false);
 
-  const CameraTransition = useCameraTransition(
-    cameraControls,
-    setViewChangeInProgress,
-    setCurrentView,
-    setCurrentTargetPos
-  );
-
-  const updateCameraPosition = (frameData) => {
-    const targetX = -frameData.pointer.x * 400;
-    const targetY = -frameData.pointer.y * 200;
-
-    frameData.camera.position.lerp({ x: targetX, y: targetY, z: 0 }, 0.1);
-    frameData.camera.lookAt(currentTargetPos.x, currentTargetPos.y, currentTargetPos.z);
-    frameData.camera.updateProjectionMatrix();
-  };
-
   useEffect(() => {
     IntroCameraTransition(
         cameraControls,
@@ -46,9 +30,42 @@ export default function CameraController({ frameData, DLClicked }) {
     );
   }, []);
 
+  const CameraTransition = useCameraTransition(
+    cameraControls,
+    setViewChangeInProgress,
+    setCurrentView,
+    setCurrentTargetPos
+  );
+
+
+  const updateCameraPosition = (frameData, radius, xAngleMin, xAngleMax, yAngleMin, yAngleMax) => {
+
+    const sensitivity = 3;
+    let angleX = -frameData.pointer.x * Math.PI * sensitivity;
+    let angleY = frameData.pointer.y * (Math.PI / 4) * sensitivity;
+    let target = new THREE.Vector3(currentTargetPos.x, currentTargetPos.y, currentTargetPos.z)
+
+    let angleXMin = THREE.MathUtils.degToRad(xAngleMin);
+    let angleXMax = THREE.MathUtils.degToRad(xAngleMax);
+    let angleYMin = THREE.MathUtils.degToRad(yAngleMin);
+    let angleYMax = THREE.MathUtils.degToRad(yAngleMax);
+
+    angleX = THREE.MathUtils.clamp(angleX, angleXMin, angleXMax);
+    angleY = THREE.MathUtils.clamp(angleY, angleYMin, angleYMax);
+
+    let cameraX = target.x + radius * Math.cos(angleX) * Math.cos(angleY);
+    let cameraY = target.y + radius * Math.sin(angleY);
+    let cameraZ = target.z + radius * Math.sin(angleX) * Math.cos(angleY);
+
+    frameData.camera.position.lerp({ x: cameraX, y: cameraY, z: cameraZ }, 0.1);
+    frameData.camera.lookAt(target);
+    frameData.camera.updateProjectionMatrix();
+    
+  };
+
   useFrame(() => {
     if (frameData && openingDone && !viewChangeInProgress) {
-      const xPos = frameData['pointer'].x;
+      const xPos = frameData.pointer.x;
 
       switch(currentView) {
         case 'main':
@@ -62,12 +79,12 @@ export default function CameraController({ frameData, DLClicked }) {
             } else if (xPos > 0.4) {
                 CameraTransition(
                     'right', 
-                    new THREE.Vector3(-1, 3, 0), 
+                    new THREE.Vector3(0, 3, -2), 
                     new THREE.Vector3(-2, 7, 15), 
                     1.0
                 );
               } else {
-                updateCameraPosition(frameData);
+                updateCameraPosition(frameData, 100, -40, 100, -45, 45);
               }
               break;
 
@@ -79,7 +96,7 @@ export default function CameraController({ frameData, DLClicked }) {
                     new THREE.Vector3(-3, 17.6, 9.8), 
                     1.0
                 );
-            } else if (xPos > 0.1) {
+            } else if (xPos > 0.5) {
                 CameraTransition(
                     'main', 
                     new THREE.Vector3(-7.7, 3, 0.3), 
@@ -87,11 +104,11 @@ export default function CameraController({ frameData, DLClicked }) {
                     1.0
                 );
               } else {
-                updateCameraPosition(frameData);
+                updateCameraPosition(frameData, 100, -60, 60, -45, 45);
               }
               break;
         case 'right':
-            if (xPos < -0.3) {
+            if (xPos < -0.6) {
                 CameraTransition(
                     'main', 
                     new THREE.Vector3(-7.7, 3, 0.3), 
@@ -99,7 +116,7 @@ export default function CameraController({ frameData, DLClicked }) {
                     1.0
                 );
             } else {
-                updateCameraPosition(frameData);
+                updateCameraPosition(frameData, 100, -10, 100, -45, 45);
             }
               break;
         case 'dl card':
