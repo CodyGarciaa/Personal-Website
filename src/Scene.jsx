@@ -13,9 +13,8 @@ import Project3_Card from './Project3_Card';
 import Project4_Card from './Project4_Card';
 import Project5_Card from './Project5_Card';
 import Project6_Card from './Project6_Card';
-import CameraController from './CameraController';
 
-export default function Scene( {handleWalletClick, setFrameData, isOpened} ) {
+export default function Scene( {handleWalletClick, handleDLClick, setFrameData, isOpened, DLClicked} ) {
           
   useFrame((state) => {
     const currentFrameData = {
@@ -32,8 +31,12 @@ export default function Scene( {handleWalletClick, setFrameData, isOpened} ) {
     <>
       <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
           <group>
+            {/* <mesh position={[-3, 17.6, 9.8]}>
+                <sphereGeometry />
+                <meshStandardMaterial color="hotpink" />
+            </mesh> */}
             <Wallet onWalletClick={handleWalletClick} isOpened={isOpened} />
-            <DL_Card />
+            <DL_Card onDLClick={handleDLClick} DLClicked={DLClicked} />
             <Business_Card />
             <Project1_Card isOpened={isOpened} />
             <Project2_Card isOpened={isOpened} />

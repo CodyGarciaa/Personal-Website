@@ -9,7 +9,7 @@ import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three
 import DL_Face from './DL_Face.jsx'
 import Bio_Details from './Bio_Details.jsx'
 
-export default function DL_Card(props) {
+export default function DL_Card({ onDLClick, DLClicked, ...props }) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/final_models/DLfinal.glb')
   const { actions, names } = useAnimations(animations, group)
@@ -21,7 +21,6 @@ export default function DL_Card(props) {
     actions['WalletOpenAnimation'].fadeIn(0.5).play()
   }, [])
 
-  const [clicked, toggleClick] = useState(false);
   const [secTime, toggleSecTime] = useState();
 
   const positionSpringRef = useSpringRef();
@@ -29,33 +28,31 @@ export default function DL_Card(props) {
 
   const positionSpring = useSpring({
     ref: positionSpringRef,
-    pos: clicked ? [-7.081, 20, -1.709] : [-7.081, 0.626, -1.709],
-    config: clicked ? { mass: 1, tension: 60, friction: 8 } : { mass: 1, tension: 50, friction: 20 },
+    pos: DLClicked ? [-7.081, 20, -1.709] : [-7.081, 0.626, -1.709],
+    config: DLClicked ? { mass: 1, tension: 60, friction: 8 } : { mass: 1, tension: 50, friction: 20 },
   });
 
   const rotationSpring = useSpring({
     ref: rotationSpringRef,
-    rot: clicked ? [THREE.MathUtils.degToRad(180), THREE.MathUtils.degToRad(210), THREE.MathUtils.degToRad(-90)] : [0, 0, THREE.MathUtils.degToRad(-90)],
+    rot: DLClicked ? [THREE.MathUtils.degToRad(180), THREE.MathUtils.degToRad(210), THREE.MathUtils.degToRad(-90)] : [0, 0, THREE.MathUtils.degToRad(-90)],
   });
 
-  useChain(clicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);
+  useChain(DLClicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);
 
   const helper = () => {
-    console.log('clicked 5');
-    if (clicked) {              //time for pos to play after rot
+    onDLClick();
+    if (DLClicked) {              //time for pos to play after rot
       toggleSecTime(0.4);
     } else {                    //time for rot to play after pos
       toggleSecTime(0.9);
     }
-    toggleClick(!clicked);
   };
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Scene" onClick={helper}>
+      <group name="Scene" onClick={DLClicked ? '' : helper}>
         <animated.group
           name="ArmatureWallet"
-          // position={dl_position}
           position={positionSpring.pos}
           rotation={rotationSpring.rot}
           >
