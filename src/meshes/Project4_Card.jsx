@@ -8,8 +8,8 @@ import * as THREE from 'three'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three'
-import Project_Details from './Project_Details'
-import Project_Card_Face from './Project_Card_Face'
+import Project_Details from '../faces/Project_Details'
+import Project_Card_Face from '../faces/Project_Card_Face'
 
 export default function Project4_Card({isOpened, ...props}) {
   const group = useRef()

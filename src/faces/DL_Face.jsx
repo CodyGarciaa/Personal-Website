@@ -1,5 +1,5 @@
-import './DL_Face.css'
-import ProfPic from '/profile_pic.jpg'
+import '../css/DL_Face.css'
+import ProfPic from '../assets/profile_pic.jpg'
 
 export default function DL_Face() {
 

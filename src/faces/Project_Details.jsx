@@ -1,4 +1,4 @@
-import './Project_Details.css'
+import '../css/Project_Details.css'
 
 export default function Bio_Details() {
     return(

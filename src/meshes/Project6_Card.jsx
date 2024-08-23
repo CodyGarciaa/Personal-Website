@@ -9,9 +9,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useSpring, useSpringRef, useChain, animated } from '@react-spring/three'
-import Project_Card_Face from './Project_Card_Face'
-import Project_Details from './Project_Details'
-import Projects_Face from './Projects_Face'
+import Project_Card_Face from '../faces/Project_Card_Face'
+import Project_Details from '../faces/Project_Details'
+import Projects_Face from '../faces/Projects_Face'
 
 export default function Project6_Card({isOpened, ...props}) {
   const group = useRef()

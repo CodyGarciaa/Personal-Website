@@ -8,12 +8,12 @@ import * as THREE from 'three'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three'
-import Project_Details from './Project_Details'
-import Project_Card_Face from './Project_Card_Face'
+import Project_Details from '../faces/Project_Details'
+import Project_Card_Face from '../faces/Project_Card_Face'
 
-export default function Project3_Card({isOpened, ...props}) {
+export default function Project2_Card({ isOpened, ...props }) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/final_models/Proj3final.glb')
+  const { nodes, materials, animations } = useGLTF('/final_models/Proj2final.glb')
   const { actions } = useAnimations(animations, group)
   const isFirstRender = useRef(true);
 
@@ -79,41 +79,37 @@ export default function Project3_Card({isOpened, ...props}) {
       <group name="Scene" onClick={helper}>
         <animated.group name="ArmatureSleeve" position={positionSpring.pos} rotation={rotationSpring.rot}>
           <skinnedMesh
-            name="Proj3Card"
-            geometry={nodes.Proj3Card.geometry}
+            name="Proj2Card"
+            geometry={nodes.Proj2Card.geometry}
             material={materials.Project_Material}
-            skeleton={nodes.Proj3Card.skeleton}
+            skeleton={nodes.Proj2Card.skeleton}
           />
           <primitive object={nodes.firstfold}>
             <primitive object={nodes.secondsleeve}>
-              <primitive object={nodes.secondfold}>
-                <primitive object={nodes.thirdsleeve}>
-                  <Html
-                    occlude="blending"
-                    wrapperClass="nodes"
-                    position={[4.08, 2.93, -0.05]}
-                    transform
-                    distanceFactor={8.1}
-                    rotation-y={THREE.MathUtils.degToRad(179.7)}
-                    rotation-x={THREE.MathUtils.degToRad(180)}
-                    style={{ pointerEvents: 'none' }}
-                  >
-                    <Project_Card_Face number={3} />
-                  </Html>
-                  <Html
-                    occlude="blending"
-                    wrapperClass="nodes"
-                    position={[4.08, 2.93, -0.2]}
-                    transform
-                    distanceFactor={8.1}
-                    rotation-y={THREE.MathUtils.degToRad(-0.3)}
-                    rotation-x={THREE.MathUtils.degToRad(180)}
-                    style={{ pointerEvents: 'none' }}
-                  >
-                    <Project_Details />
-                  </Html>
-                </primitive>
-              </primitive>
+              <Html
+                occlude="blending"
+                wrapperClass="nodes"
+                position={[4.08, 2.7, 0.17]}
+                transform
+                distanceFactor={8.1}
+                rotation-y={THREE.MathUtils.degToRad(179.8)}
+                rotation-x={THREE.MathUtils.degToRad(180)}
+                style={{ pointerEvents: 'none' }}
+              >
+                <Project_Card_Face number={2} />
+              </Html>
+              <Html
+                occlude="blending"
+                wrapperClass="nodes"
+                position={[4.08, 2.7, 0]}
+                transform
+                distanceFactor={8.1}
+                rotation-y={THREE.MathUtils.degToRad(-0.2)}
+                rotation-x={THREE.MathUtils.degToRad(180)}
+                style={{ pointerEvents: 'none' }}
+              >
+                <Project_Details />
+              </Html>
             </primitive>
           </primitive>
           <primitive object={nodes.firstsleeve} />
@@ -123,4 +119,4 @@ export default function Project3_Card({isOpened, ...props}) {
   )
 }
 
-useGLTF.preload('/final_models/Proj3final.glb')
+useGLTF.preload('/final_models/Proj2final.glb')

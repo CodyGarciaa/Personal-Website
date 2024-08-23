@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from "@react-three/fiber"
 
-import './App.css'
+import './css/App.css'
 import Scene from './Scene';
 import CameraController from './CameraController';
 

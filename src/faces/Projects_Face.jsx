@@ -1,4 +1,4 @@
-import './Projects_Face.css'
+import '../css/Projects_Face.css'
 
 export default function Projects_Face() {
     return(

@@ -1,6 +1,6 @@
 import React from 'react';
-import './Contact_Card_Face.css';
-import sendIcon from './assets/send_icon.webp'
+import '../css/Contact_Card_Face.css';
+import sendIcon from '../assets/send_icon.webp'
 
 const Contact_Card = () => {
   return (

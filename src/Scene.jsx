@@ -3,16 +3,16 @@
 import { useFrame } from "@react-three/fiber"
 import { ScrollControls } from "@react-three/drei"
 
-import './App.css'
-import Wallet from './wallet';
-import DL_Card from './dl_card';
-import Business_Card from './Business_Card';
-import Project1_Card from './Project1_Card';
-import Project2_Card from './Project2_Card';
-import Project3_Card from './Project3_Card';
-import Project4_Card from './Project4_Card';
-import Project5_Card from './Project5_Card';
-import Project6_Card from './Project6_Card';
+import './css/App.css'
+import Wallet from './meshes/Wallet';
+import DL_Card from './meshes/DL_Card';
+import Business_Card from './meshes/Business_Card';
+import Project1_Card from './meshes/Project1_Card';
+import Project2_Card from './meshes/Project2_Card';
+import Project3_Card from './meshes/Project3_Card';
+import Project4_Card from './meshes/Project4_Card';
+import Project5_Card from './meshes/Project5_Card';
+import Project6_Card from './meshes/Project6_Card';
 
 export default function Scene( {handleWalletClick, handleDLClick, setFrameData, isOpened, DLClicked} ) {
           

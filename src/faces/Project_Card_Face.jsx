@@ -1,5 +1,5 @@
 import React from 'react';
-import './Project_Card_Face.css';
+import '../css/Project_Card_Face.css';
 
 const Project_Card_Face = ( {number} ) => {
   return (

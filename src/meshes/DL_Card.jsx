@@ -6,8 +6,8 @@ import * as THREE from 'three'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three'
-import DL_Face from './DL_Face.jsx'
-import Bio_Details from './Bio_Details.jsx'
+import DL_Face from '../faces/DL_Face.jsx'
+import Bio_Details from '../faces/Bio_Details.jsx'
 
 export default function DL_Card({ onDLClick, DLClicked, ...props }) {
   const group = useRef()
