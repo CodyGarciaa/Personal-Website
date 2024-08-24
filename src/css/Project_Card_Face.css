@@ -17,7 +17,7 @@
   }
   
   .project-content {
-    flex: 3;
+    flex: 4;
     padding-right: 16px;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@
   
   .project-title {
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 0px;
     margin-top: 10px;
@@ -47,12 +47,22 @@
   .project-media {
     flex: 2;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #eeeeee;
+    width: 120px;
+    height: 150px;
+    /* background-color: #eeeeee;
     border: 2px dashed #aaa;
-    border-radius: 8px;
-    text-align: center;
+    border-radius: 8px; */
+  }
+
+  .media {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
   
   .media-placeholder {

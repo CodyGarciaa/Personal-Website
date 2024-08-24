@@ -4,8 +4,18 @@ import * as THREE from "three";
 import { CameraControls } from "@react-three/drei";
 import useCameraTransition from "../CameraTransition";
 import IntroCameraTransition from "./IntroCameraTransition";
+import Project4_Card from "./meshes/Project4_Card";
 
-export default function CameraController({ frameData, DLClicked }) {
+export default function CameraController({ 
+    frameData, 
+    DLClicked, 
+    isOpened, 
+    proj1Clicked, 
+    proj2Clicked, 
+    proj3Clicked, 
+    proj4Clicked, 
+    proj5Clicked, 
+    proj6Clicked}) {
   
   const [currentView, setCurrentView] = useState('main');
   const [currentTargetPos, setCurrentTargetPos] = useState({
@@ -16,6 +26,26 @@ export default function CameraController({ frameData, DLClicked }) {
   const [viewChangeInProgress, setViewChangeInProgress] = useState(false);
   const cameraControls = useRef();
   const [openingDone, setOpeningDone] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(3); // Initial scroll position (y-coordinate)
+
+
+  useEffect(() => {
+    const handleScroll = (event) => {
+      setScrollPosition((prev) => {
+        const newScrollPos = prev - event.deltaY * 0.01; // Adjust the multiplier for sensitivity
+        return THREE.MathUtils.clamp(newScrollPos, -25, 3); // Clamp between the target positions
+      });
+    };
+
+    if (currentView === 'project scroll') {
+      window.addEventListener('wheel', handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [currentView]);
+
 
   useEffect(() => {
     IntroCameraTransition(
@@ -28,6 +58,7 @@ export default function CameraController({ frameData, DLClicked }) {
         1,
         0.3
     );
+
   }, []);
 
   const CameraTransition = useCameraTransition(
@@ -39,7 +70,7 @@ export default function CameraController({ frameData, DLClicked }) {
 
 
   const updateCameraPosition = (frameData, radius, xAngleMin, xAngleMax, yAngleMin, yAngleMax) => {
-
+    
     const sensitivity = 3;
     let angleX = -frameData.pointer.x * Math.PI * sensitivity;
     let angleY = frameData.pointer.y * (Math.PI / 4) * sensitivity;
@@ -60,7 +91,7 @@ export default function CameraController({ frameData, DLClicked }) {
     frameData.camera.position.lerp({ x: cameraX, y: cameraY, z: cameraZ }, 0.1);
     frameData.camera.lookAt(target);
     frameData.camera.updateProjectionMatrix();
-    
+
   };
 
   useFrame(() => {
@@ -108,7 +139,20 @@ export default function CameraController({ frameData, DLClicked }) {
               }
               break;
         case 'right':
-            if (xPos < -0.6) {
+            if (isOpened){
+                CameraTransition(
+                    'project scroll', 
+                    new THREE.Vector3(0.5, 3, -1), 
+                    new THREE.Vector3(0.5, 6, 14), 
+                    1.0
+                );
+                // CameraTransition(
+                //     'project scroll', 
+                //     new THREE.Vector3(0.5, -25, -1), 
+                //     new THREE.Vector3(0.5, -22, 14), 
+                //     1.0
+                // );
+            } else if (xPos < -0.6) {
                 CameraTransition(
                     'main', 
                     new THREE.Vector3(-7.7, 3, 0.3), 
@@ -116,7 +160,7 @@ export default function CameraController({ frameData, DLClicked }) {
                     1.0
                 );
             } else {
-                updateCameraPosition(frameData, 100, -10, 100, -45, 45);
+                updateCameraPosition(frameData, 100, 10, 100, -45, 45);
             }
               break;
         case 'dl card':
@@ -130,8 +174,75 @@ export default function CameraController({ frameData, DLClicked }) {
             }
             break;
         case 'project scroll':
+            if (!isOpened){
+                CameraTransition(
+                    'right', 
+                    new THREE.Vector3(0, 3, -2), 
+                    new THREE.Vector3(-2, 7, 15), 
+                    1.0
+                );
+            } else if (proj1Clicked) {
+                CameraTransition(
+                    'project1', 
+                    new THREE.Vector3(19.5, 2.7, 0), 
+                    new THREE.Vector3(19.7, 2.7, 6), 
+                    1.0
+                );
+            } else if (proj2Clicked) {
+                CameraTransition(
+                    'project2', 
+                    new THREE.Vector3(19.7, -2.7, 0), 
+                    new THREE.Vector3(19.7, -2.5, 6), 
+                    1.0
+                );
+            } else if (proj3Clicked) {
+                CameraTransition(
+                    'project3', 
+                    new THREE.Vector3(19.7, -9.2, -1), 
+                    new THREE.Vector3(19.7, -9.2, 6), 
+                    1.0
+                );
+            } else if (proj4Clicked) {
+                CameraTransition(
+                    'project4', 
+                    new THREE.Vector3(19.7, -14.5, -1), 
+                    new THREE.Vector3(19.7, -13.2, 6), 
+                    1.0
+                );
+            } else if (proj5Clicked) {
+                CameraTransition(
+                    'project4', 
+                    new THREE.Vector3(19.85, -20.5, -1), 
+                    new THREE.Vector3(19.85, -20.8, 6), 
+                    1.0
+                );
+            } else if (proj6Clicked) {
+                CameraTransition(
+                    'project4', 
+                    new THREE.Vector3(20.4, -26.2, -1), 
+                    new THREE.Vector3(20.4, -25.3, 6), 
+                    1.0
+                );
+            }
+            else {
+                cameraControls.current.setLookAt(
+                    0.5, scrollPosition + 3, 14, // Camera position
+                    0.5, scrollPosition, -1, // Target position (adjust this as needed)
+                    true
+                );
+            }
             break;
-        case 'project card':
+        case 'project1':
+            break;
+        case 'project2':
+            break;
+        case 'project3':
+            break;
+        case 'project4':
+            break;
+        case 'project5':
+            break; 
+        case 'project6':
             break;
         case 'contact card':
             break;

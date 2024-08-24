@@ -1,27 +1,23 @@
 import React from 'react';
 import '../css/Project_Card_Face.css';
 
-const Project_Card_Face = ( {number} ) => {
+
+const Project_Card_Face = ( {data, ProjMedia} ) => {
   return (
     <div className="project-card">
       <div className='project-descript-video'>
         <div className="project-content">
-            <h2 className="project-title">Project {number}</h2>
+            <h2 className="project-title">{data.name}</h2>
             <p className="project-description">
-            Project description/abstract goes here. You can summarize the 
-            project in a few sentences to give an overview. Something something
-            something something something <strong>LAST LINE</strong>
+            {data.description}
             </p>
         </div>
         <div className="project-media">
-            <div className="media-placeholder">
-            {/* Placeholder for the project image or video */}
-            <p>Photo/Video of Project</p>
-            </div>
+            <ProjMedia />
         </div>
       </div>
       <div className="project-learnings">
-        <strong>Skills/Software Learned:</strong> 3D Model Texturing and Rendering, React (Three Fiber and Spring), Blender
+        <strong>Skills/Software Learned:</strong> {data.skills}
       </div>
     </div>
   );

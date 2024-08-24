@@ -10,12 +10,12 @@ import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three'
 import Project_Details from '../faces/Project_Details'
 import Project_Card_Face from '../faces/Project_Card_Face'
+import { FaceData, DetailsData, ProjMedia } from '../faces/Project1_Data'
 
-export default function Project1_Card({ isOpened, ...props }) {
+export default function Project1_Card({ isOpened, onProj1Clicked, Proj1Clicked, ...props }) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/final_models/Proj1final.glb')
 
-  const [clicked, toggleClick] = useState(false);
   const [secTime, toggleSecTime] = useState();
 
   const positionSpringRef = useSpringRef();
@@ -23,26 +23,26 @@ export default function Project1_Card({ isOpened, ...props }) {
 
   const positionSpring = useSpring({
     ref: positionSpringRef,
-    pos: clicked ? [20, -0.3, -0.93] : [-0.01, 0, -0.758],
-    config: clicked ? { mass: 1, tension: 60, friction: 8 } : { mass: 1, tension: 50, friction: 20 },
+    pos: Proj1Clicked ? [20, -0.3, -0.93] : [-0.01, 0, -0.758],
+    config: Proj1Clicked ? { mass: 1, tension: 60, friction: 8 } : { mass: 1, tension: 50, friction: 20 },
   });
 
   const rotationSpring = useSpring({
     ref: rotationSpringRef,
-    rot: clicked ? [0, THREE.MathUtils.degToRad(900), 0] : [0, 0, 0],
+    rot: Proj1Clicked ? [0, THREE.MathUtils.degToRad(900), 0] : [0, 0, 0],
   });
 
-  useChain(clicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);
+  useChain(Proj1Clicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);
 
   const helper = () => {
     if(isOpened) {
       console.log('clicked 5');
-      if (clicked) {              //time for pos to play after rot
+      if (Proj1Clicked) {              //time for pos to play after rot
         toggleSecTime(0.4);
-      } else {                    //time for rot to play after pos
+      } else {                         //time for rot to play after pos
         toggleSecTime(0.9);
       }
-      toggleClick(!clicked);
+      onProj1Clicked();
     }
   };
   return (
@@ -66,7 +66,7 @@ export default function Project1_Card({ isOpened, ...props }) {
               rotation-y={THREE.MathUtils.degToRad(1.03)}
               style={{ pointerEvents: 'none' }}
             >
-              <Project_Card_Face number={1} />
+              <Project_Card_Face data={FaceData} ProjMedia={ProjMedia} />
             </Html>
             <Html
               occlude="blending"
