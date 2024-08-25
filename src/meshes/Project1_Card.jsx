@@ -11,6 +11,7 @@ import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three
 import Project_Details from '../faces/Project_Details'
 import Project_Card_Face from '../faces/Project_Card_Face'
 import { FaceData, DetailsData, ProjMedia } from '../faces/Project1_Data'
+import '../css/Card.css'
 
 export default function Project1_Card({ isOpened, onProj1Clicked, Proj1Clicked, ...props }) {
   const group = useRef()

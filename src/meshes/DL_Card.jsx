@@ -8,6 +8,7 @@ import { useGLTF, useAnimations, Html } from '@react-three/drei'
 import { useSpring, useChain, useSpringRef, animated } from '@react-spring/three'
 import DL_Face from '../faces/DL_Face.jsx'
 import Bio_Details from '../faces/Bio_Details.jsx'
+import '../css/Card.css'
 
 export default function DL_Card({ onDLClick, DLClicked, ...props }) {
   const group = useRef()
@@ -22,6 +23,7 @@ export default function DL_Card({ onDLClick, DLClicked, ...props }) {
   }, [])
 
   const [secTime, toggleSecTime] = useState();
+  const [hovered, setHovered] = useState(false);
 
   const positionSpringRef = useSpringRef();
   const rotationSpringRef = useSpringRef();
@@ -48,9 +50,20 @@ export default function DL_Card({ onDLClick, DLClicked, ...props }) {
     }
   };
 
+  const helpHover1 = () => {
+    setHovered(!hovered);
+    console.log('Pointer Enter: ', hovered);
+  };
+  console.log(hovered);
+
+  const helpHover2 = () => {
+    setHovered(!hovered);
+    console.log('Pointer Leave: ', hovered);
+  };
+
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Scene" onClick={DLClicked ? '' : helper}>
+      <group name="Scene" onClick={DLClicked ? '' : helper} onPointerEnter={helpHover1} onPointerLeave={helpHover2} >
         <animated.group
           name="ArmatureWallet"
           position={positionSpring.pos}
@@ -90,6 +103,19 @@ export default function DL_Card({ onDLClick, DLClicked, ...props }) {
                 style={{ pointerEvents: 'none' }}
               >
                 <Bio_Details />
+              </Html>
+
+              <Html
+                occlude="blending"
+                wrapperClass="nodes"
+                position={[4.5, 7, 0.5]}
+                transform
+                distanceFactor={30}
+                rotation-x={THREE.MathUtils.degToRad(178.75)}
+                rotation-z={THREE.MathUtils.degToRad(90)}
+                style={{ pointerEvents: 'none' }}
+              >
+                <div>⌄</div>
               </Html>
             </primitive>
           </primitive>

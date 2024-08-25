@@ -5,9 +5,8 @@ import '../css/Project_Card_Face.css';
 export const FaceData = {
     'name': 'Ethnic Foods',
     'description': 
-    'Project description/abstract goes here. You can summarize the project in a few sentences to give an overview. Something something something something something',
-    'mediaSRC': '',
-    'skills': '3D Model Texturing and Rendering, React (Three Fiber and Spring), Blender'
+    'Created a personal database website of cooking recipes, targeted towards specific ethic groups, that takes into consideration personal allergies and ingredient accessibility.',
+    'skills': 'Backend Programming, MongoDB, Text-to-Image Models, LLMs, Web Scraping'
 }
 
 export function ProjMedia() {

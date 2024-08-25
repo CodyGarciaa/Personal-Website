@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { CameraControls } from "@react-three/drei";
-import useCameraTransition from "../CameraTransition";
+import useCameraTransition from "./CameraTransition";
 import IntroCameraTransition from "./IntroCameraTransition";
-import Project4_Card from "./meshes/Project4_Card";
 
 export default function CameraController({ 
     frameData, 
@@ -121,6 +120,12 @@ export default function CameraController({
 
         case 'left':
             if (DLClicked) {
+                // CameraTransition(
+                //     'dl card', 
+                //     new THREE.Vector3(-9, 17.6, 8), 
+                //     new THREE.Vector3(5, 30, 15), 
+                //     1.0
+                // );
                 CameraTransition(
                     'dl card', 
                     new THREE.Vector3(-9, 17.6, 8), 
@@ -146,12 +151,6 @@ export default function CameraController({
                     new THREE.Vector3(0.5, 6, 14), 
                     1.0
                 );
-                // CameraTransition(
-                //     'project scroll', 
-                //     new THREE.Vector3(0.5, -25, -1), 
-                //     new THREE.Vector3(0.5, -22, 14), 
-                //     1.0
-                // );
             } else if (xPos < -0.6) {
                 CameraTransition(
                     'main', 

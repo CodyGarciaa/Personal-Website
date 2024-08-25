@@ -14,7 +14,6 @@ export const FaceData = {
 export function ProjMedia() {
     return(
         <img 
-            // style="width:48px;height:48px;"   
             src={thePhoto} 
             className='media'
         />

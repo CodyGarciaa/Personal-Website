@@ -6,9 +6,8 @@ import '../css/Project_Card_Face.css';
 export const FaceData = {
     'name': 'Parking Tracker',
     'description': 
-    'Project description/abstract goes here. You can summarize the project in a few sentences to give an overview. Something something something something something',
-    'mediaSRC': '',
-    'skills': '3D Model Texturing and Rendering, React (Three Fiber and Spring), Blender'
+    'After a couple months of collecting and labeling a specific car that goes in view of my home security camera, I trained a neural network to detect the specific car in a live feed, and send me an email notification.',
+    'skills': 'Machine Learning, Constructing Neural Networks, OpenCV, PyTorch'
 }
 
 export function ProjMedia() {
