@@ -57,7 +57,7 @@ export default function Project5_Card({isOpened, onProj5Clicked, Proj5Clicked, .
 
   const rotationSpring = useSpring({
     ref: rotationSpringRef,
-    rot: Proj5Clicked ? [0, THREE.MathUtils.degToRad(900), 0] : [0, 0, 0],
+    rot: Proj5Clicked ? [0, THREE.MathUtils.degToRad(900), THREE.MathUtils.degToRad(2.3)] : [0, 0, 0],
   });
 
   useChain(Proj5Clicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);

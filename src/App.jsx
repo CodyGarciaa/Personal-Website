@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
-import { Canvas } from "@react-three/fiber"
+import { Canvas, useFrame } from "@react-three/fiber"
+import * as THREE from 'three'
+import { Depth, LayerMaterial, Noise } from "lamina";
 
 import './css/App.css'
 import Scene from './Scene';
@@ -16,6 +18,45 @@ function App() {
   const [proj4Clicked, setProj4Clicked] = useState(false);
   const [proj5Clicked, setProj5Clicked] = useState(false);
   const [proj6Clicked, setProj6Clicked] = useState(false);
+
+  const BG_SPEED = 0.3;
+
+  const Background = () => {
+    const ref = useRef();
+  
+    useFrame((_state, delta) => {
+      ref.current.rotation.x =
+      ref.current.rotation.y =
+      ref.current.rotation.z +=
+        delta * BG_SPEED;
+    });
+  
+    return (
+      <mesh scale={100} ref={ref}>
+        <sphereGeometry args={[1, 15, 15]} />
+        <LayerMaterial side={THREE.BackSide}>
+          <Depth
+            colorA="#f21a62"
+            colorB="#0081fc"
+            alpha={1}
+            mode="normal"
+            near={130}
+            far={200}
+            origin={[100, 100, -100]}
+          />
+          <Noise
+            mapping="local"
+            type="white"
+            scale={100}
+            colorA="white"
+            colorB="black"
+            mode="subtract"
+            alpha={0.32}
+          />
+        </LayerMaterial>
+      </mesh>
+    );
+  };
 
   const handleWalletClick = () => {
     setIsOpened(!isOpened);
@@ -54,16 +95,20 @@ function App() {
 
   return (
     <>
-      <div
-      style={{display: (isOpened || DLClicked) ? 'block' : 'none'}}
+      {/* <div
+        style={{
+          display: isOpened ? 'block' : 'none',
+          position: 'absolute',
+          top: '10px',
+          left: '10px',
+          zIndex: 'auto',
+          cursor: 'pointer',
+        }}
+        className='arrow-left'
+        onClick={handleWalletClick}
       >
-        <div onClick={handleWalletClick}>
-          Click here to go back (sleeve)
-        </div>
-        <div onClick={handleDLClick}>
-          Click here to go back (dl)
-        </div>
-      </div>
+        ⬅
+      </div> */}
       <Canvas camera={{ position: [15, 10, 10], fov: 50 }}>
         <CameraController 
           frameData={frameData} 
@@ -97,7 +142,20 @@ function App() {
           proj6Clicked={proj6Clicked}
           setFrameData={setFrameData}
         />
+        {/* <Background />   */}
       </Canvas>
+      {/* <div
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          color: 'white',
+          fontSize: '20px',
+          zIndex: 1, // Ensure it appears above the canvas
+        }}
+      >
+        Your Overlay Text
+      </div> */}
     </>
   )
 }

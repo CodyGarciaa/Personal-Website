@@ -42,6 +42,7 @@ export default function DL_Card({ onDLClick, DLClicked, ...props }) {
   useChain(DLClicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);
 
   const helper = () => {
+    console.log("Html styles:", document.querySelector(".nodes").style);
     onDLClick();
     if (DLClicked) {              //time for pos to play after rot
       toggleSecTime(0.4);
@@ -52,13 +53,13 @@ export default function DL_Card({ onDLClick, DLClicked, ...props }) {
 
   const helpHover1 = () => {
     setHovered(!hovered);
-    console.log('Pointer Enter: ', hovered);
+    // console.log('Pointer Enter: ', hovered);
   };
-  console.log(hovered);
+  // console.log(hovered);
 
   const helpHover2 = () => {
     setHovered(!hovered);
-    console.log('Pointer Leave: ', hovered);
+    // console.log('Pointer Leave: ', hovered);
   };
 
   return (
@@ -108,14 +109,14 @@ export default function DL_Card({ onDLClick, DLClicked, ...props }) {
               <Html
                 occlude="blending"
                 wrapperClass="nodes"
-                position={[4.5, 7, 0.5]}
+                position={[4.7, 7, 0.5]}
                 transform
                 distanceFactor={30}
                 rotation-x={THREE.MathUtils.degToRad(178.75)}
                 rotation-z={THREE.MathUtils.degToRad(90)}
-                style={{ pointerEvents: 'none' }}
+                style={{ display: DLClicked ? 'block' : 'none' }}
               >
-                <div>⌄</div>
+                <div className='arrow-down' onClick={onDLClick}>⬇</div>
               </Html>
             </primitive>
           </primitive>

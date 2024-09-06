@@ -57,7 +57,7 @@ export default function Project4_Card({isOpened, onProj4Clicked, Proj4Clicked, .
 
   const rotationSpring = useSpring({
     ref: rotationSpringRef,
-    rot: Proj4Clicked ? [0, THREE.MathUtils.degToRad(900), 0] : [0, 0, 0],
+    rot: Proj4Clicked ? [0, THREE.MathUtils.degToRad(900), THREE.MathUtils.degToRad(0.5)] : [0, 0, 0],
   });
 
   useChain(Proj4Clicked ? [positionSpringRef, rotationSpringRef] : [rotationSpringRef, positionSpringRef], [0, secTime]);

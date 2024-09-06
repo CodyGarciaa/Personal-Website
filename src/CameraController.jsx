@@ -60,6 +60,27 @@ export default function CameraController({
 
   }, []);
 
+  useEffect(() => {
+    const handleScroll = (event) => {
+      if (currentView !== 'project1') { // Disable scroll for project1 view
+        setScrollPosition((prev) => {
+          const newScrollPos = prev - event.deltaY * 0.01; // Adjust the multiplier for sensitivity
+          return THREE.MathUtils.clamp(newScrollPos, -25, 3); // Clamp between the target positions
+        });
+      } else {
+        event.preventDefault(); // Disable scroll behavior for project1 view
+      }
+    };
+  
+    if (currentView === 'project scroll' || currentView === 'project1') {
+      window.addEventListener('wheel', handleScroll);
+    }
+  
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [currentView]);
+
   const CameraTransition = useCameraTransition(
     cameraControls,
     setViewChangeInProgress,
@@ -190,36 +211,36 @@ export default function CameraController({
             } else if (proj2Clicked) {
                 CameraTransition(
                     'project2', 
-                    new THREE.Vector3(19.7, -2.7, 0), 
-                    new THREE.Vector3(19.7, -2.5, 6), 
+                    new THREE.Vector3(19.5, -2.8, -1), 
+                    new THREE.Vector3(19.7, -1.8, 5.5), 
                     1.0
                 );
             } else if (proj3Clicked) {
                 CameraTransition(
                     'project3', 
-                    new THREE.Vector3(19.7, -9.2, -1), 
-                    new THREE.Vector3(19.7, -9.2, 6), 
+                    new THREE.Vector3(20, -9.2, -1), 
+                    new THREE.Vector3(20.6, -9.5, 5.5), 
                     1.0
                 );
             } else if (proj4Clicked) {
                 CameraTransition(
                     'project4', 
-                    new THREE.Vector3(19.7, -14.5, -1), 
-                    new THREE.Vector3(19.7, -13.2, 6), 
+                    new THREE.Vector3(19.7, -14.7, -1), 
+                    new THREE.Vector3(20.2, -13.4, 5.5), 
                     1.0
                 );
             } else if (proj5Clicked) {
                 CameraTransition(
-                    'project4', 
-                    new THREE.Vector3(19.85, -20.5, -1), 
-                    new THREE.Vector3(19.85, -20.8, 6), 
+                    'project5', 
+                    new THREE.Vector3(19.2, -20.7, -1), 
+                    new THREE.Vector3(19.2, -21.2, 5.4), 
                     1.0
                 );
             } else if (proj6Clicked) {
                 CameraTransition(
-                    'project4', 
-                    new THREE.Vector3(20.4, -26.2, -1), 
-                    new THREE.Vector3(20.4, -25.3, 6), 
+                    'project6', 
+                    new THREE.Vector3(18.8, -26.3, -1), 
+                    new THREE.Vector3(18.8, -25.1, 5.3), 
                     1.0
                 );
             }
